@@ -74,15 +74,15 @@ void main(){
             case 4:
                 System.out.println("============== 선수 삭제 ==============");
                 System.out.println("타자를 삭제하시겠습니까? (y/n) ");
-                String type1 = sc.next();
-                if (type1.equals("y")){
+                /* String type1 = sc.next();
+                 if (type1.equals("y")){
                     System.out.println("삭제할 선수 이름 : ");
                     String name = sc.next();
                     for (int i = 0; i < batterList.size(); i++){
 
                     }
 
-                }
+                } */
                 break;
             case 0:
                 System.out.println("================ 종료 ================");
