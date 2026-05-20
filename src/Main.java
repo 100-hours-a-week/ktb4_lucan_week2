@@ -74,15 +74,38 @@ void main(){
             case 4:
                 System.out.println("============== 선수 삭제 ==============");
                 System.out.println("타자를 삭제하시겠습니까? (y/n) ");
-                /* String type1 = sc.next();
-                 if (type1.equals("y")){
-                    System.out.println("삭제할 선수 이름 : ");
-                    String name = sc.next();
-                    for (int i = 0; i < batterList.size(); i++){
+                String deleteType = sc.next();
+                System.out.print("삭제할 선수 이름 : ");
+                String deleteName = sc.next();
 
+                boolean isDeleted = false;
+
+                if (deleteType.equals("y")) {
+                    for (int i = 0; i < batterList.size(); i++) {
+                        if (batterList.get(i).getName().equals(deleteName)) {
+                            batterList.remove(i);
+                            isDeleted = true;
+                            System.out.println(deleteName + " 타자가 삭제되었습니다.");
+                            break;
+                        }
                     }
+                } else if (deleteType.equals("n")) {
+                    for (int i = 0; i < pitcherList.size(); i++) {
+                        if (pitcherList.get(i).getName().equals(deleteName)) {
+                            pitcherList.remove(i);
+                            isDeleted = true;
+                            System.out.println(deleteName + " 투수가 삭제되었습니다.");
+                            break;
+                        }
+                    }
+                } else {
+                    System.out.println("다시 입력하세요.");
+                    break;
+                }
 
-                } */
+                if (!isDeleted) {
+                    System.out.println("해당 이름의 선수를 찾을 수 없습니다.");
+                }
                 break;
             case 0:
                 System.out.println("================ 종료 ================");
