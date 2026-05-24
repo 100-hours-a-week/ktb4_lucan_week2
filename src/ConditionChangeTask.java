@@ -31,7 +31,6 @@ public class ConditionChangeTask implements Runnable{
 
             player.setCondition(condition[conditionIndex]);
 
-            //System.out.println(player.getName() + "의 컨디션 " + player.getCondition() + "으로 변경");
 
         }
     }
