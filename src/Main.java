@@ -3,8 +3,19 @@ import java.util.ArrayList;
 
 void main(){
     Scanner sc = new Scanner(System.in);
-    ArrayList<Batter> batterList = new ArrayList<>();
-    ArrayList<Pitcher> pitcherList = new ArrayList<>();
+
+    ArrayList<Player> playerList = new ArrayList<>();
+
+    ConditionChangeTask conditiontask = new ConditionChangeTask(playerList);
+
+    InjuryEventTask injurytask = new InjuryEventTask(playerList);
+
+
+    Thread conditionThread = new Thread(conditiontask);
+    conditionThread.start();
+
+    Thread injuryThread = new Thread(injurytask);
+    injuryThread.start();
 
     while(true) {
         System.out.println("======== 삼성 선발 엔트리 관리 ========");
@@ -37,7 +48,7 @@ void main(){
                     double avg = sc.nextDouble();
 
                     Batter batter = new Batter(name,age, backNum, position, avg, batOrder);
-                    batterList.add(batter);
+                    playerList.add(batter);
                 } else if (type.equals("n")) {
                     System.out.println("투수 정보를 입력하시오.");
                     System.out.print("이름 입력 : ");
@@ -52,22 +63,26 @@ void main(){
                     double era = sc.nextDouble();
 
                     Pitcher pitcher = new Pitcher(name, age, backNum, position, era);
-                    pitcherList.add(pitcher);
+                    playerList.add(pitcher);
                 } else {
                     System.out.println("다시 입력하세요.");
                 }
                 break;
             case 2:
                 System.out.println("============== 선발 타자 조회 ==============");
-                for( Batter batter : batterList){
-                    batter.showInfo();
+                for( Player player : playerList){
+                    if(player instanceof Batter){
+                        player.showInfo();
+                    }
                 }
                 System.out.println("=========================================");
                 break;
             case 3:
                 System.out.println("============== 투수 조회 ==============");
-                for( Pitcher pitcher : pitcherList){
-                    pitcher.showInfo();
+                for( Player player : playerList){
+                    if(player instanceof Pitcher){
+                        player.showInfo();
+                    }
                 }
                 System.out.println("=====================================");
                 break;
@@ -81,18 +96,18 @@ void main(){
                 boolean isDeleted = false;
 
                 if (deleteType.equals("y")) {
-                    for (int i = 0; i < batterList.size(); i++) {
-                        if (batterList.get(i).getName().equals(deleteName)) {
-                            batterList.remove(i);
+                    for (int i = 0; i < playerList.size(); i++) {
+                        if (playerList.get(i).getName().equals(deleteName)) {
+                            playerList.remove(i);
                             isDeleted = true;
                             System.out.println(deleteName + " 타자가 삭제되었습니다.");
                             break;
                         }
                     }
                 } else if (deleteType.equals("n")) {
-                    for (int i = 0; i < pitcherList.size(); i++) {
-                        if (pitcherList.get(i).getName().equals(deleteName)) {
-                            pitcherList.remove(i);
+                    for (int i = 0; i < playerList.size(); i++) {
+                        if (playerList.get(i).getName().equals(deleteName)) {
+                            playerList.remove(i);
                             isDeleted = true;
                             System.out.println(deleteName + " 투수가 삭제되었습니다.");
                             break;

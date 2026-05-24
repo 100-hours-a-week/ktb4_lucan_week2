@@ -7,4 +7,8 @@ public class Player extends Person{
         this.backNum = backNum;
         this.position = position;
     }
+
+    void showInfo(){
+
+    }
 }
